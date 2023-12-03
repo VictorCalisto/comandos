@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Rails Console: Console interativo Ruby (IRB) para interagir com sua aplicação Rails.
 rails console
 
