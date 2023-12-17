@@ -28,16 +28,14 @@ docker images -aq
 docker volume ls -q
 # Apagar tudo e comecar de novo.
 # -- tudo associado ao compose
-docker-compose down --remove-orphans &&
-docker-compose rm -f -v &&
-docker-compose rmi -f &&
+docker-compose down --volumes --remove-orphans &&
+docker-compose down --rmi all &&
 docker-compose up --build
 # -- tudo mesmo
 docker rm -f $(docker ps -aq) &&
 docker rmi -f $(docker images -aq) &&
 docker volume rm $(docker volume ls -q) &&
 docker network rm $(docker network ls -q) &&
-docker-compose down --volumes --remove-orphans &&
 docker-compose up --build
 # Remove os contêineres, redes e volumes
 docker compose down --remove-orphans
