@@ -28,6 +28,9 @@ git clone $LINK_REPOSITORIO
 # Resetando alterações
 git reset --hard
 
+# Deleta branch local
+git branch -D $NOME_DA_BRANCH
+
 # Visualizando o histórico de commits
 git log
 
