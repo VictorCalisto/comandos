@@ -55,4 +55,6 @@ docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 # Lista processos internos do container
 docker container top $NOME_OU_ID_DO_CONTAINER
 # Lista configuracoes do container
-ddocker container inspect $NOME_OU_ID_DO_CONTAINER
+docker container inspect $NOME_OU_ID_DO_CONTAINER
+# Altera a imagem para salvar as ultimas modificacoes
+docker container commit -m "mensagem" $NOME_OU_ID_DO_CONTAINER
