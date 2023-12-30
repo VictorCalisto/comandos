@@ -52,3 +52,7 @@ docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
 docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 # Deploy da imagem
 docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+# Lista processos internos do container
+docker container top $NOME_OU_ID_DO_CONTAINER
+# Lista configuracoes do container
+ddocker container inspect $NOME_OU_ID_DO_CONTAINER
