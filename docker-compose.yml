@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  ruby:
+    container_name: ruby
+    image: rails
+    restart: always # reinicia sempre que cair
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # " porta de fora : porta de dentro "
+    volumes:
+      - .:/app
+      - gems:/usr/local/bundle # facilita na hora do bundle install
+    environment:
+      - APP_NAME: "nome da aplicacao"
+    stdin_open: true # mantém a entrada padrao aberta no terminal aberto, permitindo a entrada interativa.
+    tty: true # aloca um terminal pseudo-TTY.
+    depends_on: # so sobe se o outro subir
+      - postgres  
+
+volumes:
+  gems:
