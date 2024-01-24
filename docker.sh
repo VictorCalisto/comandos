@@ -4,8 +4,8 @@
 docker compose build
 # Sobe o conteiner a partir da imagem
 docker compose up
-# Ja constroi a imagem e sobe o container
-docker compose up --build
+# Ja constroi a imagem e sobe o container // -d e de detected e serve para liberar o terminal
+docker compose up --build -d
 # Lista os containers em execucao
 docker ps
 # Lista todos os containes incluindos os parados
@@ -30,7 +30,7 @@ docker volume ls -q
 # -- tudo associado ao compose
 docker-compose down --volumes --remove-orphans &&
 docker-compose down --rmi all &&
-docker-compose up --build
+docker-compose up --build -d
 # -- tudo mesmo
 docker rm -f $(docker ps -aq) &&
 docker rmi -f $(docker images -aq) &&
