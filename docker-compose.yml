@@ -14,6 +14,7 @@ services:
     volumes:
       - .:/app
       - gems:/usr/local/bundle # facilita na hora do bundle install
+    working_dir: /app # comeca o container na pasta app
     environment:
       - APP_NAME: "nome da aplicacao"
     stdin_open: true # mantém a entrada padrao aberta no terminal aberto, permitindo a entrada interativa.
