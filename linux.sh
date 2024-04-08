@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###############################
-# Comandos de navegação:
+# Comandos:
 cd # vai para o home
 cd ~ # vai para o home
 cd - # retorna ao diretorio anterior
@@ -65,6 +65,7 @@ kill -HUP $PID # e o mesmo kill -1. # rele os arquivos de configuracao sem final
 kill -15 $PID # finaliza de forma amigavel. # kill -TERM $PID
 # killall5 -9 # mata todos os processos todos mesmos nunca use.
 top # mostra em tempo real o que esta sendo usado na maquina
+###############################
 
 
 
@@ -72,8 +73,7 @@ top # mostra em tempo real o que esta sendo usado na maquina
 
 
 
-
-
+###############################
 ###
 diff arquivo1 arquivo2 # compara as diferencas entre dois arquivos.
 diff -u arquivo1 arquivo2 # tras um retorno mais humano
@@ -106,6 +106,16 @@ grep -ri 'texto' .
 ###
 ###############################
 
+
+
+
+
+
+
+
+
+
+
 ###############################
 # Diretorios Linux
 /bin # Binários de usuários, essenciais no boot
@@ -128,6 +138,16 @@ grep -ri 'texto' .
 /proc # Diretório virtual que contém informações sobre os processos em execução, configuração de hardware, estatísticas do sistema, detalhes da CPU, da memória e do kernel, entre outros dados essenciais para o funcionamento e monitoramento do sistema operacional Linux.
 ###############################
 
+
+
+
+
+
+
+
+
+
+###############################
 # Observacoes
 lost+found # achados e perdidos // pasta que os programas prodem salvar as coisas em recuperar depois em caso de falta de energia.
 .ko # extesao dos modulos do kernel do linus. Os modulos do kernel sao tipos os drives do windows.
@@ -145,6 +165,20 @@ comandos externos # tem que buscar no disco.
 [a-z] # curinga para um intervalo de caracteres
 [ˆabc],[ˆa-z] # curinga para excluir caracter ou intervalo. exemplo ' ls m[ˆa-c]' => liste tudo que comeca com m menos o que tem abc como segunda letra.
 expressao{expressao1,expressao2} # curinga pra subistituir a expressao por expressaoexpressao1 e expressaoexpressao2 simultaniamente.
+###############################
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###############################
 sync # E recomendavel usar antes de reinciar/desligar a forca.
 halt # Desliga
