@@ -24,7 +24,8 @@ cat -n # enumera as linhas
 zcat teste.z # vizualiza arquivos compactados
 cp # copia o arquivo
 mv # move o arquivo
-touch # cria um aquivo vazio. voce tem que colocar a extensao. txt por exemplo.
+touch arquivo.txt # cria um aquivo vazio. voce tem que colocar a extensao. txt por exemplo.
+touch -t arquivo.txt # altera o quando o arquivo foi criado ou acessado.
 date # exibe data
 date -u # exibe o date em utc
 date -s "YYYY-MM-DD hh:mm:ss" # edita data e hora do sistema, hora em formato de 24 h
@@ -38,8 +39,54 @@ more arquivo.txt # ler arquivo piorado
 sort -n # ordena o arquivo
 sort -k2 # ordena pela segunda coluna
 sort -t ':' -k2 # define o caractere : como um separador da coluna 1 e da coluna 2. se ele nao for definido o separador natural e o espaco.
+tail arquivo.txt # mostra as 10 ultimas linhas do arquivo. util pra ver logs de erros
+tail -f # segue o fim do arquivo. conforme ele vai gerando mais linhas no final ele vai mostrando as linahas geradas.
+trai -n 50 # mostra as ultimas 50 linhas do arquivo.
+time ls # executa o comando ls e mostra no final o tempo que demorou para executar o comando ls
+uptime # mostra a quanto tempo a maquina esta ligada.
+echo # exibe uma mesagem na tela
+echo -n # faz quebra de linha
+su # pede a SENHA DO ROOT para que o usuario se torne root e tenha privielegio de root.
+sudo # pede a SENHA DO USUARIO para que o usuario tenha privilegios de root.
+/bin/su - # e mais seguro  para acessar o root com o bin. O - e para fazer login
+adduser $NOME_DO_USUARIO sudo # sobre o usuario para administrador, mas abaixo do root
+deluser $NOME_DO_USUARIO sudo # desce o usuario de administrador.
+# depois do root usar os comandos adduser e deluser os usuarios $NOME_DO_USUARIO tem que deslogar e logar novamente. ou forcar o logout desse usuario com
+pkill -KILL -u $NOME_DO_USUARIO # esse comando mata todos os processos do $NOME_DO_USUARIO, o que forca ele a refazer o login. Se possivel peca para ele refazer o login em vez de usar esse comando.
+killall -u $NOME_DO_USUARIO
+kill -9 $(ps -u $NOME_DO_USUARIO -o pid=)
+uname -a # retorna os dados do sistema operacinal
+| # O taipe '|' alimenta o comando a direita com a saida do comando a esquerda. util para combinar comandos.
+ps ax # pega todos os procesos de todos os usuarios
+ps aux # filtra por usuario
+ps axf # diz qual processo chamou qual.
+kill -9 $PID # mata o processo direto na memoria # e o mesmo kill -KILL $PID
+kill -HUP $PID # e o mesmo kill -1. # rele os arquivos de configuracao sem finalizar.
+kill -15 $PID # finaliza de forma amigavel. # kill -TERM $PID
+# killall5 -9 # mata todos os processos todos mesmos nunca use.
+top # mostra em tempo real o que esta sendo usado na maquina
 
 
+
+
+
+
+
+
+
+###
+diff arquivo1 arquivo2 # compara as diferencas entre dois arquivos.
+diff -u arquivo1 arquivo2 # tras um retorno mais humano
+-r # compara as pastas com um retorno mais humano.
+-q # compara diretorios por nomes de arquivos sem entrar nos arquivos
+-U # mostra o numero da linha onde ta a diferenca
+-w # ignora espacos em branco e quebra de linha
+###
+chattr # altera atributos
++i # torna o arquivo/diretorio imultavel, o que inclui impossivel de deleçao
+-i # torna multavel de novo.
++a # permite apenas acresimo. algo novo entra, mas nao pode editar/apagar/sobrescrever algo velho.
+isattr # lista atributos
 ###
 find $PATH_DA_PASTA_QUE_DESEJA_PROCURA -maxdepth $NUMERO_COM_A_QUANTIDADE_MAXIMA_DE_SUB_DIRETORIOS_PARA_PROCURAR -type $f_PARA_ARQUIVOS_E_d_PARA_PASTAS -name "$NOME_DO_QUE_DESEJA_PROCURAR"
 find . -maxdepth 5 -type f -name '*.pdf'
@@ -98,7 +145,8 @@ comandos externos # tem que buscar no disco.
 [a-z] # curinga para um intervalo de caracteres
 [ˆabc],[ˆa-z] # curinga para excluir caracter ou intervalo. exemplo ' ls m[ˆa-c]' => liste tudo que comeca com m menos o que tem abc como segunda letra.
 expressao{expressao1,expressao2} # curinga pra subistituir a expressao por expressaoexpressao1 e expressaoexpressao2 simultaniamente.
-
+###############################
+sync # E recomendavel usar antes de reinciar/desligar a forca.
 halt # Desliga
 reboot # Reinicia
 shutdown -h now # Desliga
@@ -110,3 +158,6 @@ shutdown 18:00 -h 18:00 # Programa hora para desligar
 shutdown -h +30 # Programa a para desligar em 30 minutos.
 shutdown -r +30 "mesagem a todos os usuarios informado que a maquina reiniciara em 30 minutos" # Programa a para Reiniciar em 30 minutos.
 shutdown -c "mensagem a todos os usuarios avisando o cancelamento" # cancela os shutdown agnedados.
+echo b >/proc/sysrq-trigger # Reinicia na mara, mesma coisa que puxar da tomada.
+# echo o >/porc/sysrq-trigger # Desliga na mara, mesma coisa que puxar da tomada. evitar ao maximo usar.
+###############################
