@@ -105,9 +105,13 @@ grep -ri 'texto' .
 -r # busca recursivamente nos sub diretorios
 ###
 ###############################
-
-
-
+# INSTALADOS A PARTE
+# AWK # filtro util para o grep #
+awk --version # verifica se ja esta instalado
+sudo apt-get install gawk # instala se ja nao esta instalado
+awk '{print}' ARQUIVO # mostra o arquivo todo
+ls -la | awk '{print $NUMERO_DA_COLUNA}' # filtra pela coluna numero 1, por exemplo
+awk -F '$CARACTERE_SEPARADOR' '{print $NUMERO_DA_COLUNA}' ARQUIVO # separa as colunas pela presenca do caracter especidicado.
 
 
 
