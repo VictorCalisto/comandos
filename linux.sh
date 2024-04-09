@@ -65,6 +65,8 @@ kill -HUP $PID # e o mesmo kill -1. # rele os arquivos de configuracao sem final
 kill -15 $PID # finaliza de forma amigavel. # kill -TERM $PID
 # killall5 -9 # mata todos os processos todos mesmos nunca use.
 top # mostra em tempo real o que esta sendo usado na maquina
+ping $NUMERO_DO_IP_OU_NOME_DO_DNS # testa a conexao
+
 ###############################
 
 
@@ -105,6 +107,13 @@ grep -ri 'texto' .
 -r # busca recursivamente nos sub diretorios
 ###
 ###############################
+
+
+
+
+
+
+
 # INSTALADOS A PARTE
 # AWK # filtro util para o grep #
 awk --version # verifica se ja esta instalado
@@ -112,12 +121,29 @@ sudo apt-get install gawk # instala se ja nao esta instalado
 awk '{print}' ARQUIVO # mostra o arquivo todo
 ls -la | awk '{print $NUMERO_DA_COLUNA}' # filtra pela coluna numero 1, por exemplo
 awk -F '$CARACTERE_SEPARADOR' '{print $NUMERO_DA_COLUNA}' ARQUIVO # separa as colunas pela presenca do caracter especidicado.
-
-
-
-
-
-
+# CURL # tras informacoes dos arquivos e paginas da web. pode baixar mas o wget e mais recomendado pra isso.
+curl --version
+sudo apt-get install curl
+curl -O exemplo-de-url.com/nome-do-arquivo
+curl -o novo-nome exemplo-de-url.com/antigo-nome
+# WGET # baixa arquivos, ate midia e zip
+wget --version
+sudo apt-get install wget
+wget -O novo-nome exemplo-de-url.com/antigo-nome
+# SSH # libera o acesso remoto # tem que configurar a maquina as vezes
+ssh -v # isso é executado dentro do servidor.
+sudo apt-get install -y openssh-server # lembrese de expor a porta 22. ssh tem que ser na porta 22.
+ssh nomedousuario@enderecodohost # depois desse passo uma senha sera solicitada
+-p 3000 # para expecificar uma porta padrao. a porta interna sempre e 22 mas a externa, que liga com a interna, pode ser outra.
+-X # permite ligar ao x11 e ter interface grafica. mas nao é uma boa pratica em servidores.
+# SCP # é instalado junto com ssh. # a logica de funcionamento é ORIGEM => DESTINO
+scp [OPÇÕES] [usuário da origem@IP]:[localização do arquivo] [usuário do destino@IP]:[diretório destino]
+#opcoes sao
+-r # transfere pastas e subpastas
+-P # especifica a porta, a padrao e 22 igual o ssh
+#exemplos
+scp -r /caminho/do/aquivo/para/baixar usuarioDaMaquinaLocal@$IP_DA_MAQUINA_LOCAL:/caminho/para/salvar # acessando do servidor
+scp -P 3000 -r usuario@dnsdamaquina:/caminho/do/aquivo/para/baixar /caminho/para/salvar # acessando locamente.
 
 
 ###############################
