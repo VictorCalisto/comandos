@@ -47,3 +47,12 @@ rails destroy
 
 # Mostrar a lista de tarefas rake disponíveis:
 rails -T
+
+##################
+# Sites com a documentação oficial do ruby on rails
+https://apidock.com/
+https://rubygems.org/
+https://guides.rubyonrails.org/
+https://ruby-doc.org/
+https://api.rubyonrails.org/
+https://www.rubydoc.info/
