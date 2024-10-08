@@ -47,6 +47,7 @@ git push origin $NOME_DA_BRANCH_LOCAL --force
 
 # Sobrescrever a branch local com a remota
 git reset --hard
+git clean -fd # apaga arquivos e pastas nao rastreados.
 git pull
 
 # Mergear 
