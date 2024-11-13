@@ -67,6 +67,80 @@ kill -15 $PID # finaliza de forma amigavel. # kill -TERM $PID
 top # mostra em tempo real o que esta sendo usado na maquina
 ping $NUMERO_DO_IP_OU_NOME_DO_DNS # testa a conexao
 
+# top (Table of Processes): Exibe uma visão em tempo real dos processos em execução,
+# mostrando detalhes como PID, uso de CPU e memória e o estado dos processos.
+top
+# Para sair do top, pressione 'q'.
+
+# ps (Process Status): Fornece uma "fotografia" dos processos em execução no momento.
+# Algumas opções úteis são:
+ps
+
+# ps aux (All Users Extended): lista todos os processos em execução com detalhes extensivos,
+# como %CPU, %MEM, PID, entre outros.
+ps aux
+
+# ps -u [usuario] (User): Filtra e exibe apenas os processos pertencentes ao usuário especificado.
+# Exemplo: ps -u root
+ps -u root
+
+# ps -p [PID] (Process ID): Exibe informações detalhadas sobre um processo específico com o PID fornecido.
+# Exemplo: ps -p 1234
+ps -p 1234
+
+# ps -C [comando] (Command): Filtra e exibe os processos associados ao comando especificado.
+# Exemplo: ps -C firefox
+ps -C firefox
+
+# pstree (Process Tree): Mostra a árvore de processos, ilustrando a relação hierárquica entre processos pai e filho.
+pstree
+
+# head (Head of File): Exibe as primeiras linhas de um arquivo ou saída de um comando.
+# Por padrão, exibe as primeiras 10 linhas.
+# Exemplo: Exibir as 10 primeiras linhas de um arquivo:
+head /var/log/syslog
+
+# pipe (|) (Pipe): Redireciona a saída de um comando como entrada para outro comando.
+# É utilizado no encadeamento de comandos e processamento de dados de modo sequencial.
+# Exemplo: Comando que lista todos os arquivos e passa para o head para exibir apenas os 10 primeiros.
+ls -l | head
+
+# sort (Sort): Ordena a saída de um comando ou o conteúdo de um arquivo.
+# Pode ser combinado com outros comandos usando pipe para organizar dados.
+# Exemplo: Ordenar uma lista de arquivos por tamanho:
+ls -l | sort -n -k5
+
+# kill (Kill Process): Envia sinais para processos em execução. Alguns exemplos de uso:
+
+# kill [PID] (Process ID): Envia o sinal padrão de interrupção (SIGTERM) para o processo com o PID especificado.
+# Este comando permite uma interrupção suave do processo.
+# Exemplo: kill 1234
+kill 1234
+
+# kill -9 [PID] (Signal 9): Envia um sinal de interrupção abrupta (SIGKILL) para o processo com o PID especificado.
+# Este comando força o encerramento imediato do processo.
+# Exemplo: kill -9 1234
+kill -9 1234
+
+# kill -STOP [PID] (Stop Signal): Envia um sinal de pausa (SIGSTOP) para o processo, interrompendo sua execução.
+# O processo continua em execução, mas suspenso até receber um sinal de continuação.
+# Exemplo: kill -STOP 1234
+kill -STOP 1234
+
+# kill -CONT [PID] (Continue Signal): Envia um sinal de continuação (SIGCONT) para retomar a execução de um processo que foi pausado.
+# Exemplo: kill -CONT 1234
+kill -CONT 1234
+
+# pkill (Process Kill): Envia sinais para processos com base no nome do processo.
+# Todos os processos que correspondem ao nome fornecido serão afetados.
+# Exemplo: pkill firefox
+pkill firefox
+
+# killall (Kill All): Envia sinais para todos os processos com um nome específico.
+# Este comando é útil para enviar sinais a múltiplos processos de forma simultânea.
+# Exemplo: killall firefox
+killall firefox
+
 ###############################
 
 
