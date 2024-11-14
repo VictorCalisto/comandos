@@ -141,6 +141,69 @@ pkill firefox
 # Exemplo: killall firefox
 killall firefox
 
+# Declaração de variáveis
+nome="Maria"
+idade=22
+# Definindo e exportando variáveis
+export DB_USER="admin"
+export DB_PASSWORD="senha123"
+
+# Estrutura if else
+nota=75
+if [ $nota -ge 90 ]; then
+  echo "Aprovado com Distinção"
+elif [ $nota -ge 70 ]; then
+  echo "Aprovado"
+else
+  echo "Reprovado"
+fi
+
+# Laço while
+contador=1
+while [ $contador -le 3 ]; do
+  echo "Contando: $contador"
+  ((contador++))
+done
+
+# Laço for
+for i in {1..3}; do
+  echo "Iteração do for: $i"
+done
+
+# Função que recebe múltiplos parâmetros
+soma() {
+  resultado=$(($1 + $2))
+  echo "A soma de $1 e $2 é: $resultado"
+}
+soma 5 7
+
+# Função que retorna um valor
+multiplicacao() {
+  resultado=$(($1 * $2))
+  echo $resultado
+}
+resultado=$(multiplicacao 4 3)
+echo "O resultado da multiplicação é: $resultado"
+
+# Switch case
+fruta="banana"
+case $fruta in
+  "maçã")
+    echo "A fruta é uma maçã."
+    ;;
+  "banana")
+    echo "A fruta é uma banana."
+    ;;
+  *)
+    echo "Fruta desconhecida."
+    ;;
+esac
+# do while
+contador=1
+until [ $contador -gt 5 ]; do
+  echo "Contador: $contador"
+  ((contador++))  # Incrementa o contador
+done
 ###############################
 
 
