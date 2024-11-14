@@ -143,8 +143,20 @@ pkill firefox
 # Exemplo: killall firefox
 killall firefox
 
- $? #O $? é uma variável especial no Bash que armazena o código de saída do último comando executado. Ele é muito útil para verificar se um comando foi bem-sucedido ou se ocorreu algum erro.
+$? #O $? é uma variável especial no Bash que armazena o código de saída do último comando executado. Ele é muito útil para verificar se um comando foi bem-sucedido ou se ocorreu algum erro.
 
+
+bc # calculadora
+scale=2 # precisao, numeros depois da virgula
+sqrt(25) # operacao matematica
+
+bc <<< "scale=2;sqrt(25)" # e assim que se usa o bc
+
+
+
+
+
+#############################################################
 ls /home
 echo $?  # Exibe 0 porque 'ls' foi bem-sucedido
 ls /diretorio_inexistente
