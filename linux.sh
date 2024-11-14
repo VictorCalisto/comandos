@@ -142,6 +142,35 @@ pkill firefox
 # Exemplo: killall firefox
 killall firefox
 
+ $? #O $? é uma variável especial no Bash que armazena o código de saída do último comando executado. Ele é muito útil para verificar se um comando foi bem-sucedido ou se ocorreu algum erro.
+
+ls /home
+echo $?  # Exibe 0 porque 'ls' foi bem-sucedido
+ls /diretorio_inexistente
+echo $?  # Exibe um valor diferente de 0 (geralmente 2)
+
+# Tentar criar um diretório
+mkdir /tmp/novo_diretorio
+
+# Verificar se o comando foi bem-sucedido
+if [ $? -eq 0 ]; then
+  echo "Diretório criado com sucesso."
+else
+  echo "Falha ao criar diretório."
+fi
+
+
+
+####################################################
+
+
+
+
+
+
+
+
+
 # Declaração de variáveis
 nome="Maria"
 idade=22
@@ -205,6 +234,50 @@ until [ $contador -gt 5 ]; do
   echo "Contador: $contador"
   ((contador++))  # Incrementa o contador
 done
+
+
+#!/bin/bash
+
+# Função que soma vários parâmetros
+soma() {
+  soma_total=0  # Inicializa a variável para armazenar o total da soma
+
+  # Loop para iterar sobre todos os parâmetros passados
+  for numero in "$@"; do
+    soma_total=$((soma_total + numero))  # Adiciona cada número à soma
+  done
+
+  echo $soma_total  # Retorna o resultado da soma
+}
+
+# Chama a função passando vários números
+echo $(soma 1 2 3 4 5 6 7 8 9)  # Saída: 45
+
+# Passando parâmetros para o script: "um parâmetro" "dois parâmetros" "três parâmetros" "com espaços"
+
+# Usando "$@" (com aspas):
+# Quando usamos "$@" (com aspas), cada parâmetro é tratado como uma entidade independente.
+# Ou seja, os parâmetros são tratados separadamente, mesmo que contenham espaços em branco dentro deles.
+# A citação dupla preserva cada argumento como foi passado, com espaços ou sem.
+
+echo "Usando \"\$@\":"
+for parametro in "$@"; do
+  # Cada parâmetro é impresso como uma unidade, preservando o espaço dentro de cada um.
+  echo "Parametro: '$parametro'"
+done
+
+# Usando "$*" (com aspas):
+# Quando usamos "$*" (com aspas), todos os parâmetros são combinados em uma única string.
+# Eles são separados por um único espaço, e o espaço dentro de cada parâmetro não é preservado.
+# Todos os parâmetros são concatenados em uma string, como se fossem apenas um único argumento.
+
+echo -e "\nUsando \"\$*\":"
+for parametro in $*; do
+  # Todos os parâmetros são divididos por espaço, e o espaço dentro de um parâmetro é ignorado.
+  echo "Parametro: '$parametro'"
+done
+
+
 ###############################
 
 
