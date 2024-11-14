@@ -394,3 +394,27 @@ shutdown -r +30 "O sistema será reiniciado em 30 minutos!"
 # Cancela um shutdown ou reboot agendado
 shutdown -c "Desligamento cancelado!"
 
+if [ $var -eq 5 ]  # Usando um único colchete [ ... ] para testar a expressão. Esse é um comando externo (test) que compara valores. Deve-se ter cuidado com espaços e variáveis com caracteres especiais, que podem causar erros.
+ 
+[[ $var -eq 5 ]]   # Usando dois colchetes [[ ... ]] no Bash, que oferecem mais funcionalidades, como suporte a expressões regulares, maior flexibilidade em comparação de strings e melhor manipulação de variáveis com espaços. É mais seguro e não precisa de aspas para variáveis com espaços.
+
+# Usando um único colchete [ ... ] (comando `test`)
+if [ $var -eq 5 ]; then  # Compara se a variável $var é igual a 5.
+    echo "var é igual a 5"
+fi
+
+# Se a variável contiver espaços ou caracteres especiais, deve-se colocar a variável entre aspas para evitar erros:
+if [ "$var" == "algum valor com espaços" ]; then
+    echo "Isso vai funcionar"
+fi
+
+# Usando dois colchetes [[ ... ]] (comando built-in no Bash)
+if [[ $var == "algum valor com espaços" ]]; then  # Não é necessário colocar as variáveis entre aspas, pois o Bash já lida melhor com espaços e caracteres especiais.
+    echo "Isso vai funcionar sem aspas!"
+fi
+
+# Usando dois colchetes para expressões regulares com =~
+regex="^abc"
+if [[ $1 =~ $regex ]]; then  # Usando =~ para verificar se a variável $1 corresponde à expressão regular.
+    echo "A variável $1 corresponde ao regex"
+fi
