@@ -164,6 +164,26 @@ fi
 
 ####################################################
 
+# exemplo de uso do ~/.bashrc
+# Definindo o caminho para comandos
+export PATH="$HOME/bin:$PATH"
+
+# Personalizando o prompt (PS1)
+export PS1="[\u@\h \W]\$ "
+
+# Definindo aliases
+alias ll='ls -lh'
+alias la='ls -la'
+
+# Carregar configurações adicionais
+if [ -f "$HOME/.bash_aliases" ]; then
+    . "$HOME/.bash_aliases"
+fi
+
+# Definindo funções personalizadas
+func() {
+    echo "Esta é uma função personalizada"
+}
 
 
 
