@@ -67,6 +67,7 @@ kill -15 $PID # finaliza de forma amigavel. # kill -TERM $PID
 top # mostra em tempo real o que esta sendo usado na maquina
 ping $NUMERO_DO_IP_OU_NOME_DO_DNS # testa a conexao
 sudo chown -R novo_usuario:novo_grupo /caminho/para/diretorio # mudar dono da pasta ou arquivo.
+2> /dev/null # redireciona o erro para null (some com a mensagem de erro)
 
 # top (Table of Processes): Exibe uma visão em tempo real dos processos em execução,
 # mostrando detalhes como PID, uso de CPU e memória e o estado dos processos.
