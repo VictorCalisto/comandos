@@ -410,6 +410,23 @@ expressao{expressao1,expressao2} # curinga pra subistituir a expressao por expre
 ###############################
 
 
+* * * * * comando_a_ser_executado
+- - - - -
+| | | | |
+| | | | +----- Dia da semana (0 - 7) (0 e 7 são domingo)
+| | | +------- Mês (1 - 12)
+| | +--------- Dia do mês (1 - 31)
+| +----------- Hora (0 - 23)
++------------- Minuto (0 - 59)
+crontab -l # vizualizar
+crontab -e # editar
+sudo systemctl status cron# verificar o status do cron
+sudo systemctl start cron
+sudo systemctl restart cron
+0 8-18 * * * /home/usuario/comando_periodico.sh # repete de hora em hora das 8 as 18
+0 6 * * 1 /home/usuario/semana_inicio.sh # executa toda segunda as 6.
+0 6 * * 0 /home/usuario/semana_inicio.sh # executa todo domingo as 6
+
 
 
 
