@@ -54,3 +54,28 @@ git pull
 git branch # Verifica onde voce esta
 git checkout $NOME_DA_BRANCH # Vá para a branch de destino
 git merge $NOME_DA_BRANCH # Nome da branch que voce quer juntar na outra.(mergear)
+
+
+
+# gera o comando git clearbranches
+git config --global alias.clearbranches '!f() { \
+  if [ ! -d .git ]; then \
+    echo "Este não é um repositório Git."; \
+    exit 1; \
+  fi; \
+  branches_to_keep="main master develop homolog teste"; \
+  for branch in $(git branch | sed "s/[* ]//g"); do \
+    skip=0; \
+    for keep in $branches_to_keep; do \
+      if [ "$branch" = "$keep" ]; then \
+        skip=1; \
+        break; \
+      fi; \
+    done; \
+    if [ $skip -eq 0 ]; then \
+      git branch -D "$branch"; \
+    fi; \
+  done; \
+}; f'
+# usar o comando git clearbreanches para apagar todas as branches exeto main, master, develop, homolog, teste
+
