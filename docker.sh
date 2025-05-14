@@ -36,6 +36,7 @@ docker rm -f $(docker ps -aq) &&
 docker rmi -f $(docker images -aq) &&
 docker volume rm $(docker volume ls -q) &&
 docker network rm $(docker network ls -q) &&
+docker builder prune --all --force &&
 docker-compose up --build
 # Remove os contêineres, redes e volumes
 docker compose down --remove-orphans
