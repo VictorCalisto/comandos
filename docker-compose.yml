@@ -5,7 +5,8 @@ services:
   ruby:
     container_name: ruby
     image: rails
-    restart: always # reinicia sempre que cair
+    command: rails s # ATENÇÃO: isso substitui o comando cmd do dockerfile, so use nao tiver dockerfile.
+    restart: always # reinicia sempre que cair ##### unless-stopped - reinicia sempre que cair, mas nao quando voce pora
     build:
       context: .
       dockerfile: Dockerfile
