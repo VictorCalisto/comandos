@@ -28,8 +28,8 @@ docker images -aq
 docker volume ls -q
 # Apagar tudo e comecar de novo.
 # -- tudo associado ao compose
-docker-compose down --volumes --remove-orphans &&
-docker-compose down --rmi all &&
+docker-compose down --volumes --remove-orphans --rmi all
+docker builder prune --all --force &&
 docker-compose up --build -d
 # -- tudo mesmo
 docker rm -f $(docker ps -aq) &&
