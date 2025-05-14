@@ -43,7 +43,7 @@ docker compose down --remove-orphans
 docker exec -it $NOME_OU_ID_DO_CONTAINER bash
 # Abre um container paralelo (irmao) do container original mas vinculado a ele.
 # -- é utiu pra container que nasce e morre em seguida.
-docker compose run -it $NOME_DO_SERVICO bash
+docker compose run -it --rm $NOME_DO_SERVICO bash
 # Verifica ou faz login
 docker login
 # Constrói a imagem
