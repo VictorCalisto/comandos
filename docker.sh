@@ -2,6 +2,11 @@
 
 # Constroi a imagem
 docker compose build
+# Logs dos containers
+docker logs <$nome_ou_id_do_container>
+docker logs -f <$nome_ou_id_do_container>
+docker logs --since "2025-05-01T00:00:00" --until "2025-05-02T00:00:00" <$nome_ou_id_do_container>
+
 # Sobe o conteiner a partir da imagem
 docker compose up
 # Ja constroi a imagem e sobe o container // -d e de detected e serve para liberar o terminal
