@@ -1,0 +1,80 @@
+#!/bin/bash
+set -euvxo pipefail
+IFS=$'\n\t'
+
+PROJETO="ubuntu_24"
+HARBOR_REGISTRY=
+HARBOR_IMAGE_NAME="gitlab_ci/$PROJETO"
+DOCKERFILE_PATH="Dockerfile"
+BUILDKITD_PATH="$(pwd)/buildkitd.toml"
+CERT_PATH=
+
+# Remove builder antigo
+trap 'docker buildx rm buildx-builder || true' EXIT
+
+echo "--- Baixando certificado do Harbor ---"
+openssl s_client -showcerts -connect "$HARBOR_REGISTRY:443" -servername "$HARBOR_REGISTRY" < /dev/null 2>/dev/null \
+  | openssl x509 -outform PEM > "$CERT_PATH"
+
+if [ ! -s "$CERT_PATH" ]; then
+  echo "Erro: Falha ao baixar o certificado de $HARBOR_REGISTRY"
+  exit 1
+fi
+
+echo "--- Gerando arquivo buildkitd.toml ---"
+cat > "$BUILDKITD_PATH" <<EOF
+#Feito para o Harbor usando parametros da documentação https//docs.docker.com/build/buildkit/toml-configuration/
+#Comentado por IA
+  # Ativa logs detalhados
+  debug = true
+  trace = true
+  # Permite permissões inseguras (usar com cautela)
+  #insecure-entitlements = [ "network.host", "security.insecure" ]
+  # Worker OCI (direto, via runc/crun etc.)
+  [worker.oci]
+    enabled = true
+    #platforms = ["linux/amd64", "linux/arm64"]
+    snapshotter = "auto"
+    rootless = false
+    noProcessSandbox = false
+    # Configurações de Garbage Collection
+    gc = true
+    gckeepstorage = "20GB"
+    reservedSpace = "30%"
+    maxUsedSpace = "60%"
+    minFreeSpace = "20GB"
+  # Registry corporativo
+  [registry."$HARBOR_REGISTRY"]
+    ca = ["$CERT_PATH"]
+    insecure = false
+EOF
+echo "--- Configurando builder com suporte a multiplataforma ---"
+
+# Cria builder novo com config e suporte a multiplataforma
+docker buildx create --name buildx-builder \
+  --driver docker-container \
+  --use \
+  --platform linux/amd64,linux/arm64 \
+  --config "$BUILDKITD_PATH"
+
+# Inicializa o builder
+docker buildx inspect buildx-builder --bootstrap
+
+# Define nomes das imagens com tag e latest
+IMAGE_TAG="$(date +%Y%m%d%H%M)"
+FULL_IMAGE_NAME="$HARBOR_REGISTRY/$HARBOR_IMAGE_NAME:$IMAGE_TAG"
+LATEST_IMAGE_NAME="$HARBOR_REGISTRY/$HARBOR_IMAGE_NAME:latest"
+
+echo "--- Iniciando build multiplataforma da imagem $PROJETO ---"
+echo "Imagens $FULL_IMAGE_NAME e $LATEST_IMAGE_NAME sendo geradas."
+
+docker buildx build \
+  -f "$DOCKERFILE_PATH" \
+  -t "$FULL_IMAGE_NAME" \
+  -t "$LATEST_IMAGE_NAME" \
+  --platform linux/amd64,linux/arm64 \
+  --push .
+
+echo "Imagens $FULL_IMAGE_NAME e $LATEST_IMAGE_NAME enviadas com sucesso para o Harbor!"
+
+echo "--- Processo concluído ---"
